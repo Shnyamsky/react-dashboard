@@ -1,0 +1,52 @@
+import React from "react";
+
+import { useSelector } from "react-redux";
+import { selectPhotoByAlbumId } from "../../redux/photo/selectors";
+import { RootState } from "../../redux/store";
+
+import { Carousel, Empty } from "antd";
+
+const contentStyle: React.CSSProperties = {
+  margin: "0 auto",
+  borderRadius: "8px",
+  height: "70vh",
+  lineHeight: "70vh",
+  textAlign: "center",
+  color: "#000",
+};
+
+const containerStyle: React.CSSProperties = {
+  margin: "10px",
+  borderRadius: "8px",
+  border: "1px solid #f0f0f0",
+  backgroundColor: "#bae0ff",
+};
+
+export type PhotosSliderProps = {
+  albumId: number;
+};
+
+export const PhotoSliderOld: React.FC<PhotosSliderProps> = ({ albumId }) => {
+  const photos = useSelector((state: RootState) => selectPhotoByAlbumId(state, { albumId }));
+
+  if (!photos) {
+    return <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />;
+  }
+
+  return (
+    <div style={containerStyle}>
+      <Carousel draggable>
+        {Object.values(photos).map((photo) => {
+          return (
+            <div key={photo?.id}>
+              <div style={{ display: "flex", flexDirection: "column" }}>
+                <h1 style={{ margin: "0 auto", color: "#fff" }}>{photo?.title}</h1>
+                <img src={photo?.url} style={contentStyle} alt={photo?.thumbnailUrl} />
+              </div>
+            </div>
+          );
+        })}
+      </Carousel>
+    </div>
+  );
+};
