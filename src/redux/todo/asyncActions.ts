@@ -25,9 +25,9 @@ export const fetchUpdateTodo = createAsyncThunk<TodoItem, FetchTodoParams>(
 
     const todoItem = selectTodoById(state, { todoId });
 
-    const { data } = await axios.put<TodoItem>(
+    const { data } = await axios.patch<TodoItem>(
       `https://jsonplaceholder.typicode.com/todos/${todoId}`,
-      todoItem,
+      { completed: todoItem!.completed },
     );
 
     return data;
