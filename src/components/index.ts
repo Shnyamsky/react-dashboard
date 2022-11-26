@@ -10,3 +10,4 @@ export * from "./PhotoSlider";
 export * from "./Slider";
 
 export * from "./Kanban";
+export * from "./KanbanCard";

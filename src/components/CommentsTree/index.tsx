@@ -5,54 +5,36 @@ import { selectCommentByPostId, selectCommentStatus } from "../../redux/comment/
 import { RootState, useAppDispatch } from "../../redux/store";
 import { fetchComments } from "../../redux/comment/asyncActions";
 
+import { Spin, Tree } from "antd";
+import type { DataNode } from "antd/es/tree";
+
+import { CommentItem } from "../../redux/comment/types";
+
+type CommentMap = {
+  [k: string]: CommentItem;
+};
+
 type CommentsTreeProps = {
   postId: number;
 };
 
-// TODO: rewrite this
-import { Spin, Tree } from "antd";
-import type { DataNode } from "antd/es/tree";
-import { CommentItem } from "../../redux/comment/types";
-type CommentMap = {
-  [k: string]: CommentItem | undefined;
-};
-
-const dig = (comments: CommentMap = {}) => {
-  const list = [];
+const getTreeData = (comments: CommentMap) => {
   const treeComments = Object.entries(comments);
 
-  if (treeComments.length > 0) {
-    const key = "0";
+  const list = treeComments.map(([commentKey, commentData]) => {
+    const key = String(commentKey);
     const treeNode: DataNode = {
       key,
       title: (
         <>
-          <h3>{treeComments[0][1]?.email}</h3>
-          <h1>{treeComments[0][1]?.name}</h1>
-          <p>{treeComments[0][1]?.body}</p>
+          <h3>{commentData.email}</h3>
+          <h1>{commentData.name}</h1>
+          <p>{commentData.body}</p>
         </>
       ),
     };
-
-    treeComments.splice(0, 1);
-
-    treeNode.children = treeComments?.map(([commentKey, commentData]) => {
-      const key = String(commentKey);
-      const treeNode: DataNode = {
-        key,
-        title: (
-          <>
-            <h3>{commentData?.email}</h3>
-            <h1>{commentData?.name}</h1>
-            <p>{commentData?.body}</p>
-          </>
-        ),
-      };
-      return treeNode;
-    });
-
-    list.push(treeNode);
-  }
+    return treeNode;
+  });
 
   return list;
 };
@@ -66,8 +48,7 @@ export const CommentsTree: React.FC<CommentsTreeProps> = ({ postId }) => {
     appDispatch(fetchComments({ postId }));
   }, []);
 
-  //TODO: rewrite this
-  const treeData = dig(comments);
+  const treeData = getTreeData(comments as CommentMap);
 
   if (!treeData.length && loadingStatus === "loading") {
     return (

@@ -46,17 +46,17 @@ export const NewPostForm: React.FC = () => {
   const { postId } = useParams();
   const post = useSelector((state: RootState) => selectPostById(state, { postId: Number(postId) }));
 
-  const [formState, dispatch] = useReducer(reducer, {
+  const [formState, formDispatch] = useReducer(reducer, {
     title: post?.title || "",
     body: post?.body || "",
   });
 
   const onChangeTitle = (event: React.ChangeEvent<HTMLInputElement>) => {
-    dispatch({ type: FormActions.CHANGETITLE, payload: event.target.value });
+    formDispatch({ type: FormActions.CHANGETITLE, payload: event.target.value });
   };
 
   const onChangeText = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
-    dispatch({ type: FormActions.CHANGETEXT, payload: event.target.value });
+    formDispatch({ type: FormActions.CHANGETEXT, payload: event.target.value });
   };
 
   const onSubmitPost = () => {
@@ -77,7 +77,7 @@ export const NewPostForm: React.FC = () => {
       <Divider orientation="left">Create a post</Divider>
       <Card title="Write a new post" style={{ margin: "10px" }}>
         <Input
-          placeholder="Write header..."
+          placeholder="Write title..."
           type="text"
           value={formState.title}
           onChange={onChangeTitle}

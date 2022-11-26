@@ -42,7 +42,7 @@ export const fetchAddPost = createAsyncThunk<PostItem, FetchPostParams>(
 
 export const fetchUpdatePost = createAsyncThunk<PostItem, FetchPostParams>(
   "post/fetchUpdatePost",
-  async ({ title, body, id, userId = 1 }) => {
+  async ({ title, body, id, userId }) => {
     const postItem = {
       title,
       body,

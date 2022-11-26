@@ -1,5 +1,5 @@
 import React from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 
 import { DashboardLayout } from "./Layouts/DashboardLayout/DashboardLayout";
 
@@ -15,7 +15,8 @@ export const App: React.FC = () => {
   return (
     <DashboardLayout>
       <Routes>
-        <Route index element={<HomePage />} />
+        {/* <Route index element={<HomePage />} /> */}
+        <Route index element={<Navigate to="posts" replace />} />
 
         <Route path="/posts" element={<PostsPage />} />
         <Route path="/posts/create" element={<NewPostForm />} />
