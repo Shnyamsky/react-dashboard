@@ -1,4 +1,3 @@
-import { LoadingStatuses } from "../../constants/loadingStatuses";
 import { RootState } from "../store";
 
 export const selectAlbumModuleState = (state: RootState) => state.album;

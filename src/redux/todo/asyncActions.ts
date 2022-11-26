@@ -15,10 +15,6 @@ export const fetchTodo = createAsyncThunk<TodoItem[]>("todo/fetchTodo", async (_
 
   const { data } = await axios.get<TodoItem[]>(`https://jsonplaceholder.typicode.com/todos`);
 
-  // const { data } = await axios.get<TodoItem[]>(
-  //   `https://jsonplaceholder.typicode.com/users/1/todos`,
-  // );
-
   return data;
 });
 

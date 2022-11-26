@@ -15,10 +15,6 @@ export const fetchPosts = createAsyncThunk<PostItem[]>("post/fetchPosts", async 
 
   const { data } = await axios.get<PostItem[]>(`https://jsonplaceholder.typicode.com/posts`);
 
-  // const { data } = await axios.get<PostItem[]>(
-  //   `https://jsonplaceholder.typicode.com/users/1/posts`,
-  // );
-
   return data;
 });
 

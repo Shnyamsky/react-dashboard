@@ -7,7 +7,7 @@ import { fetchTodo } from "../../redux/todo/asyncActions";
 
 import { LoadingStatuses } from "../../constants/loadingStatuses";
 
-import { Button, Divider, Spin } from "antd";
+import { Divider, Spin } from "antd";
 
 import { Kanban } from "../../components";
 

@@ -1,7 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { useDispatch } from "react-redux";
 
-import user from "./user/slice";
 import post from "./post/slice";
 import album from "./album/slice";
 import todo from "./todo/slice";
@@ -10,7 +9,6 @@ import photo from "./photo/slice";
 
 export const store = configureStore({
   reducer: {
-    user,
     post,
     comment,
     album,

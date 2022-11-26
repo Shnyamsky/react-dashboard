@@ -7,11 +7,6 @@ type SliderProps = {
   children: React.ReactElement[];
 };
 
-// const sliferOffset = {
-//   width: sliderRef.current?.offsetWidth,
-//   height: sliderRef.current?.offsetHeight,
-// };
-
 export const Slider: React.FC<SliderProps> = ({ children }) => {
   const [photos, setPhotos] = useState<React.ReactElement[]>([]);
   const [offset, setOffset] = useState<Number>(0);

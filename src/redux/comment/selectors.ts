@@ -1,4 +1,3 @@
-import { LoadingStatuses } from "../../constants/loadingStatuses";
 import { RootState } from "../store";
 
 export const selectCommentModuleState = (state: RootState) => state.comment;

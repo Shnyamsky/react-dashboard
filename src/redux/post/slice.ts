@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction, createEntityAdapter } from "@reduxjs/toolkit";
+import { createSlice, createEntityAdapter } from "@reduxjs/toolkit";
 import { fetchPosts, fetchAddPost, fetchDeletePost, fetchUpdatePost } from "./asyncActions";
 
 import { LoadingStatuses } from "../../constants/loadingStatuses";
