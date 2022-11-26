@@ -35,9 +35,9 @@ export const EditAlbum: React.FC = () => {
   return (
     <div style={{ display: "flex", flexDirection: "column" }}>
       <Divider orientation="left">Edit Album</Divider>
-      <Link to={`/albums/${albumId}`}>
+      <Link to={`/albums`}>
         <Button style={{ margin: 10, width: "30%" }} type="primary">
-          Back to album
+          Back to albums
         </Button>
       </Link>
       <div style={{ display: "flex", flexWrap: "wrap" }}>
@@ -51,7 +51,7 @@ export const EditAlbum: React.FC = () => {
                 Delete
               </Button>
             }
-            style={{ width: "250px", margin: "auto" }}>
+            style={{ width: "250px", margin: "auto", marginBottom: "1vh" }}>
             <img style={{ maxWidth: "100%" }} src={photo?.url} alt={photo?.thumbnailUrl} />
           </Card>
         ))}

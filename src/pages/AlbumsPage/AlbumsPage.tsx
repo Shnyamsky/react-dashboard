@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import { useAppDispatch } from "../../redux/store";
 import { useSelector } from "react-redux";
@@ -8,7 +8,10 @@ import { fetchAlbums } from "../../redux/album/asyncActions";
 
 import { LoadingStatuses } from "../../constants/loadingStatuses";
 
-import { Button, Empty, Spin, Divider } from "antd";
+import { Empty, Spin, Divider, Collapse } from "antd";
+import { SettingOutlined } from "@ant-design/icons";
+import { Album } from "../../components";
+const { Panel } = Collapse;
 
 const containerStyle: React.CSSProperties = {
   margin: "10px",
@@ -17,6 +20,7 @@ const containerStyle: React.CSSProperties = {
 };
 
 export const AlbumsPage: React.FC = () => {
+  const navigate = useNavigate();
   const appDispatch = useAppDispatch();
 
   const loadingStatus = useSelector(selectAlbumStatus);
@@ -25,6 +29,16 @@ export const AlbumsPage: React.FC = () => {
   useEffect(() => {
     appDispatch(fetchAlbums());
   }, []);
+
+  const onClickSettings = (id: number) => (
+    <SettingOutlined
+      onClick={(event) => {
+        event.stopPropagation();
+        window.scrollTo(0, 0);
+        navigate(`edit/${id}`);
+      }}
+    />
+  );
 
   if (loadingStatus === LoadingStatuses.LOADING) {
     return (
@@ -35,7 +49,7 @@ export const AlbumsPage: React.FC = () => {
     );
   }
 
-  if (!albums) {
+  if (!Object.values(albums).length) {
     return (
       <div style={containerStyle}>
         <Divider orientation="left">Albums</Divider>
@@ -47,12 +61,16 @@ export const AlbumsPage: React.FC = () => {
   return (
     <div style={containerStyle}>
       <Divider orientation="left">Albums</Divider>
-
-      {Object.values(albums).map((album) => (
-        <Link key={album?.id} to={String(album?.id)}>
-          <Button style={{ width: "100%", marginBottom: 5 }}>{album?.title}</Button>
-        </Link>
-      ))}
+      <Collapse accordion defaultActiveKey={["1"]}>
+        {Object.values(albums).map((album) => (
+          <Panel
+            header={album!.title}
+            key={album!.id.toString()}
+            extra={onClickSettings(album!.id)}>
+            <Album albumId={album!.id} />
+          </Panel>
+        ))}
+      </Collapse>
     </div>
   );
 };

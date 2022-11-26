@@ -8,11 +8,11 @@ import { Empty } from "antd";
 
 import { Slider } from "../Slider";
 
-type PhotosSliderProps = {
+type SliderContainerProps = {
   albumId: number;
 };
 
-export const PhotoSlider: React.FC<PhotosSliderProps> = ({ albumId }) => {
+export const SliderContainer: React.FC<SliderContainerProps> = ({ albumId }) => {
   const photos = useSelector((state: RootState) => selectPhotoByAlbumId(state, { albumId }));
 
   if (!photos) {
@@ -27,8 +27,8 @@ export const PhotoSlider: React.FC<PhotosSliderProps> = ({ albumId }) => {
               style={{
                 position: "absolute",
                 color: "#fff",
-                margin: "0 auto",
                 bottom: "15px",
+                display: "flex",
               }}>
               {photo?.title}
             </h1>

@@ -28,7 +28,7 @@ export const Post: React.FC<PostProps> = ({ postId }) => {
   };
 
   const onClickEdit = () => {
-    navigate(`${postId}/edit`);
+    navigate(`edit/${postId}`);
   };
 
   if (!post) {

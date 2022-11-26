@@ -1,14 +1,9 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 
 import { Layout, Menu } from "antd";
 const { Sider } = Layout;
-import {
-  HomeOutlined,
-  BarsOutlined,
-  PictureOutlined,
-  CheckSquareOutlined,
-} from "@ant-design/icons";
+import { BarsOutlined, PictureOutlined, CheckSquareOutlined } from "@ant-design/icons";
 
 import { ContentLayout } from "../ContentLayout/ContentLayout";
 
@@ -22,17 +17,12 @@ const TitleStyle: React.CSSProperties = {
 };
 
 const items = [
-  { label: "Home", key: "/", icon: <HomeOutlined /> },
   { label: "Posts", key: "/posts", icon: <BarsOutlined /> },
   { label: "Albums", key: "/albums", icon: <PictureOutlined /> },
   { label: "Todos", key: "/todos", icon: <CheckSquareOutlined /> },
 ];
 
-type DashboardLayoutProps = {
-  children: React.ReactNode;
-};
-
-export const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
+export const DashboardLayout: React.FC = () => {
   const navigate = useNavigate();
   const [collapsed, setCollapsed] = useState(false);
 
@@ -67,7 +57,9 @@ export const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) =>
           items={items}
         />
       </Sider>
-      <ContentLayout>{children}</ContentLayout>
+      <ContentLayout>
+        <Outlet />
+      </ContentLayout>
     </Layout>
   );
 };
