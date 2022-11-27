@@ -1,5 +1,9 @@
 # Admin Dashboard on React
 
+## Vercel
+
+[React Dasboard App](https://react-dashboard-kappa-lemon.vercel.app)
+
 ## Tech stack
 
 TypeScript, React, Redux Toolkit on Vite, Vitest for tests.
