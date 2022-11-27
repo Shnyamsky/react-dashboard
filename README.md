@@ -2,8 +2,7 @@
 
 ## Tech stack
 
-TypeScript, React, Redux Toolkit
-Vite, Vitest for tests.
+TypeScript, React, Redux Toolkit on Vite, Vitest for tests.
 
 ## To start project in development mode:
 
